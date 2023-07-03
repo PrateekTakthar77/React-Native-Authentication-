@@ -12,26 +12,25 @@ export const AuthProvider = ({ children }) => {
     const [userToken, setUserToken] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
 
-    const login = (username,password) => {
-        // isLoading(true);
-        axios.post(`${BASE_URL}api/auth/login`,{
+    const login = (username, password) => {
+        setIsLoading(true);
+        axios.post(`${BASE_URL}api/auth/login`, {
             "mobile": username,
             "password": password,
-        }).then(res =>{
+        }).then(res => {
+            // console.log(res.data);
             let userInfo = res.data;
+            console.log(userInfo.token);
             setUserInfo(userInfo);
-            setUserToken(userInfo.data.token);
+            setUserToken(userInfo.token);
             AsyncStorage.setItem('userinfo', JSON.stringify(userInfo));
-            AsyncStorage.setItem('userToken',userInfo.data.token);
-            console.log(userInfo);
-            console.log('userToken'+ userInfo.data.token);
+            AsyncStorage.setItem('userToken', userInfo.token);
+            console.log('userToken' + userInfo.token);
         })
-        .catch(e=>{
-            console.log(`Login error ${e}`);
-        })
-        // setUserToken('janus');
-        // AsyncStorage.setItem('userToken','janus')
-        setIsLoading(false);
+            .catch(e => {
+                console.log(`Login error hello ${e}`);
+                setIsLoading(false);
+            })
     }
     const logout = () => {
         setIsLoading(true)
@@ -41,27 +40,27 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(false);
     }
 
-    const isLogedIn = async() =>{
-        try{
+    const isLogedIn = async () => {
+        try {
             setIsLoading(true);
             let userToken = await AsyncStorage.getItem('userToken');
             let userInfo = await AsyncStorage.getItem('userinfo');
             userInfo = JSON.parse(userInfo);
 
-            if(userInfo){
+            if (userInfo) {
                 setUserToken(userToken);
                 setUserInfo(userInfo);
             }
             setIsLoading(false);
-        }catch(e){
+        } catch (e) {
             console.log(`is logged in error ${e}`);
         }
     }
-    useEffect(()=>{
+    useEffect(() => {
         isLogedIn();
-    },[])
+    }, [])
     return (
-        <AuthContext.Provider value={{ login, logout, isLoading, userToken }}>
+        <AuthContext.Provider value={{ login, logout, isLoading, userToken, userInfo }}>
             {children}
         </AuthContext.Provider>
     )
