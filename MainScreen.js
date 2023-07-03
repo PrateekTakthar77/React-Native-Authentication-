@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React from 'react'
-import {AuthContext} from './components/context';
+import {AuthContext} from './components/AuthContext';
 
 const MainScreen = () => {
-    const {signOut} = React.useContext(AuthContext);
+    const {logout} = React.useContext(AuthContext);
     return (
         <View>
-            <TouchableOpacity onPress={() => { signOut() }}>
+            <TouchableOpacity onPress={() => { logout() }}>
                 <View style={styles.signInbutton}>
                     <Text style={styles.signInText}>Logout</Text>
                 </View>

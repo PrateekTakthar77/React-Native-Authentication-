@@ -1,51 +1,11 @@
 import { StyleSheet, Text, View, ScrollView, Image, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import { AuthContext } from './components/context';
+import React, { useState, useContext } from 'react'
+import { AuthContext } from './components/AuthContext';
 
 const LogIn = () => {
-    // const [mobileNumber, setMobileNumber] = useState('');
-    // const [password, setPassword] = useState('');
-
-    const [data, SetData] = React.useState({
-        username: '',
-        password: '',
-        check_textInputChange: false,
-        secureTextEntry: true
-    });
-
-    const { signIn } = React.useContext(AuthContext);
-    const textInputChange = (val) => {
-        if (val.lenght !== 0) {
-            SetData({
-                ...data,
-                username: val,
-                check_textInputChange: true
-            });
-        } else {
-            SetData({
-                ...data,
-                username: val,
-                check_textInputChange: false
-            });
-        }
-    }
-
-    const handlePasswordChange = (val) => {
-        SetData({
-            ...data,
-            password: val
-        })
-    }
-    const updateSecureTextEntry=()=>{
-        SetData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry
-        })
-    }
-    const loginhandle = (username,password)=>{
-        signIn(username,password)
-    }
-
+    const { login } = useContext(AuthContext)
+    const [mobile,setMobile] = useState(null);
+    const [pasword,setPassword] = useState(null);
     return (
         <View style={styles.body}>
             <ScrollView>
@@ -63,7 +23,7 @@ const LogIn = () => {
                         autoCapitalize="none"
                         autoCorrect={false}
                         placeholder="Mobile No."
-                        onChangeText={(val) => textInputChange(val)}
+                        onChangeText={(text) => setMobile(text)}
                     />
                     {/* password input */}
                     <TextInput
@@ -71,11 +31,11 @@ const LogIn = () => {
                         autoCapitalize="none"
                         autoCorrect={false}
                         placeholder="Password"
-                        onChangeText={(val) => handlePasswordChange(val)}
-                        secureTextEntry
+                        onChangeText={(text) => setPassword(text)}
+                        // secureTextEntry
                     />
 
-                    <TouchableOpacity onPress={() => {loginhandle(data.username,data.password)}}>
+                    <TouchableOpacity onPress={() => { login(mobile,pasword) }}>
                         <View style={styles.signInbutton}>
                             <Text style={styles.signInText}>SIGN IN</Text>
                         </View>
