@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import React ,{ useContext } from 'react'
-import {AuthContext} from './components/AuthContext';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React, { useContext } from 'react'
+import { AuthContext } from './components/AuthContext';
 
 const MainScreen = () => {
     const { userInfo } = useContext(AuthContext)
-    const {logout} = React.useContext(AuthContext);
+    const { logout } = React.useContext(AuthContext);
     return (
         <View>
             <TouchableOpacity onPress={() => { logout() }}>
@@ -12,7 +12,7 @@ const MainScreen = () => {
                     <Text style={styles.signInText}>Logout</Text>
                 </View>
             </TouchableOpacity>
-            <Text>`Hi {userInfo.User.name}</Text>
+            <Text> Hi </Text>
         </View>
     )
 }

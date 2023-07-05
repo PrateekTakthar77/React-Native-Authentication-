@@ -28,7 +28,9 @@ function App() {
 
     // Display a splash screen while the isLoading state is true
     if (isLoading) {
-        return <Wait />;
+        setTimeout(() => {
+             return <Wait />;
+        }, 2000)
     }
 
     return (
