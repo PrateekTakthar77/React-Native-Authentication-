@@ -8,18 +8,18 @@ import Wait from "./wait";
 import LogIn from "./LogIn";
 import MainScreen from "./MainScreen";
 
-function Splashscreen({ navigation }) {
-    setTimeout(() => {
-        navigation.replace('login')
-    }, 2000)
+// function Splashscreen({ navigation }) {
+//     setTimeout(() => {
+//         navigation.replace('login')
+//     }, 2000)
 
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-            <StatusBar barStyle='light-content' hidden={false} />
-            <Image source={require('./images/splash.png')} />
-        </View>
-    );
-}
+//     return (
+//         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
+//             <StatusBar barStyle='light-content' hidden={false} />
+//             <Image source={require('./images/splash.png')} />
+//         </View>
+//     );
+// }
 
 const Stack = createNativeStackNavigator();
 
